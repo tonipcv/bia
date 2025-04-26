@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  whatsapp  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Lead source
+  source    String   @default("face-protocol")
+  
+  // Tracking
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+  
+  // Status
+  status     LeadStatus @default(PENDING)
+  converted  Boolean    @default(false)
+  
+  @@index([email])
+  @@index([whatsapp])
+  @@index([createdAt])
+  @@index([status])
+}
+
+model QuizResponse {
+  id        String   @id @default(cuid())
+  whatsapp  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Mantendo campo existente
+  hasPurchased Boolean @default(false)
+  
+  // Quiz responses
+  answers   Json?    // Store all quiz answers as JSON
+  
+  // Additional tracking
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+  
+  @@index([whatsapp])
+  @@index([createdAt])
+}
+
+model Purchase {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Customer info
+  customerEmail   String
+  customerWhatsapp String
+  
+  // Purchase details
+  planType    String
+  amount      Float
+  currency    String   @default("BRL")
+  status      PaymentStatus @default(PENDING)
+  
+  // Payment info
+  paymentMethod  String?
+  paymentId      String?  // Stripe payment ID
+
+  @@index([customerEmail])
+  @@index([customerWhatsapp])
+  @@index([createdAt])
+  @@index([status])
+}
+
+enum LeadStatus {
+  PENDING
+  CONTACTED
+  QUALIFIED
+  CONVERTED
+  LOST
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+} 

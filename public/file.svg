@@ -1,0 +1,35 @@
+<svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  viewBox="0 0 500 500"
+  fill="none"
+>
+  <!-- Símbolo circular -->
+  <path
+    d="M250 100
+       A 100 100 0 0 1 350 200
+       L 250 200
+       L 250 300
+       L 350 300
+       A 100 100 0 0 1 250 400
+       A 100 100 0 0 1 150 300
+       L 250 300
+       L 250 200
+       L 150 200
+       A 100 100 0 0 1 250 100"
+    stroke="#1a1a1a"
+    stroke-width="30"
+    fill="none"
+  />
+  
+  <!-- Texto -->
+  <text
+    x="250"
+    y="450"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="48"
+    fill="#1a1a1a"
+  >
+    LONGEVIFY
+  </text>
+</svg>
