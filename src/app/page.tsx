@@ -243,7 +243,7 @@ export default function Home() {
             {selectedAmount && (
               <div className="mt-8 animate-fade-in">
                 <p className="text-sm text-gray-400 mb-4">
-                  Após os 14 dias, sua assinatura será renovada automaticamente por R$ 97/mês.
+                  Após os 14 dias, sua assinatura será renovada por 69/mês.
                   Cancele quando quiser.
                 </p>
                 <Button
